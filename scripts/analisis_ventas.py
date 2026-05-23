@@ -12,13 +12,27 @@ ventas.columns = ventas.columns.str.strip()
 ventas["sales_date"] = pd.to_datetime(ventas["sales_date"])
 
 # CALCULO DE METRICAS
-# calculamos el total de ventas del año
+
+# Utilizamos sum() para obtener la suma total de la columna sales_amount.
+# Esto nos permite conocer la facturación total registrada durante el año
+# y tener una referencia general del desempeño comercial.
 ventas_totales = ventas["sales_amount"].sum()
-# calculamos el promedio diario de ventas
+
+# Utilizamos mean() para calcular el promedio de ventas diarias.
+# Esta métrica sirve para conocer el comportamiento promedio de las ventas
+# y poder comparar distintos períodos contra un valor de referencia.
 promedio_diario = ventas["sales_amount"].mean()
-# buscamos el día con mayor facturacion
+
+# Utilizamos idxmax() para encontrar la posición donde se encuentra
+# la venta más alta del dataset. Luego usamos loc[] para acceder
+# a toda la información de ese registro, incluyendo fecha y monto.
+# Esto permite identificar el día de mayor facturación del año.
 dia_mayor_venta = ventas.loc[ventas["sales_amount"].idxmax()]
-# buscamos el día con menor facturacion
+
+# Del mismo modo, utilizamos idxmin() para encontrar la posición de la venta más baja
+# registrada en el dataset. Después utilizamos loc[] para obtener
+# toda la información correspondiente a ese día.
+# Esto ayuda a identificar períodos de menor actividad comercial.
 dia_menor_venta = ventas.loc[ventas["sales_amount"].idxmin()]
 
 # ANALISIS MENSUAL
